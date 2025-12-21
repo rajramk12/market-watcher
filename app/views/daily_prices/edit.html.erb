@@ -1,0 +1,12 @@
+<% content_for :title, "Editing daily price" %>
+
+<h1>Editing daily price</h1>
+
+<%= render "form", daily_price: @daily_price %>
+
+<br>
+
+<div>
+  <%= link_to "Show this daily price", @daily_price %> |
+  <%= link_to "Back to daily prices", daily_prices_path %>
+</div>

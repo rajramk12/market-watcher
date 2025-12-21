@@ -1,0 +1,47 @@
+<%= form_with(model: stock) do |form| %>
+  <% if stock.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(stock.errors.count, "error") %> prohibited this stock from being saved:</h2>
+
+      <ul>
+        <% stock.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :stock, style: "display: block" %>
+    <%= form.text_field :stock %>
+  </div>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :isin, style: "display: block" %>
+    <%= form.text_field :isin %>
+  </div>
+
+  <div>
+    <%= form.label :active, style: "display: block" %>
+    <%= form.checkbox :active %>
+  </div>
+
+  <div>
+    <%= form.label :mappings, style: "display: block" %>
+    <%= form.text_field :mappings %>
+  </div>
+
+  <div>
+    <%= form.label :exchange_id, style: "display: block" %>
+    <%= form.text_field :exchange_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

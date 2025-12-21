@@ -1,0 +1,12 @@
+<% content_for :title, "Editing metric" %>
+
+<h1>Editing metric</h1>
+
+<%= render "form", metric: @metric %>
+
+<br>
+
+<div>
+  <%= link_to "Show this metric", @metric %> |
+  <%= link_to "Back to metrics", metrics_path %>
+</div>

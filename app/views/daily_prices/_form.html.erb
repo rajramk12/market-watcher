@@ -1,0 +1,67 @@
+<%= form_with(model: daily_price) do |form| %>
+  <% if daily_price.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(daily_price.errors.count, "error") %> prohibited this daily_price from being saved:</h2>
+
+      <ul>
+        <% daily_price.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :stock, style: "display: block" %>
+    <%= form.text_field :stock %>
+  </div>
+
+  <div>
+    <%= form.label :date, style: "display: block" %>
+    <%= form.date_field :date %>
+  </div>
+
+  <div>
+    <%= form.label :open, style: "display: block" %>
+    <%= form.text_field :open %>
+  </div>
+
+  <div>
+    <%= form.label :low, style: "display: block" %>
+    <%= form.text_field :low %>
+  </div>
+
+  <div>
+    <%= form.label :high, style: "display: block" %>
+    <%= form.text_field :high %>
+  </div>
+
+  <div>
+    <%= form.label :close, style: "display: block" %>
+    <%= form.text_field :close %>
+  </div>
+
+  <div>
+    <%= form.label :last, style: "display: block" %>
+    <%= form.text_field :last %>
+  </div>
+
+  <div>
+    <%= form.label :volume, style: "display: block" %>
+    <%= form.text_field :volume %>
+  </div>
+
+  <div>
+    <%= form.label :turnover, style: "display: block" %>
+    <%= form.text_field :turnover %>
+  </div>
+
+  <div>
+    <%= form.label :extras, style: "display: block" %>
+    <%= form.text_field :extras %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

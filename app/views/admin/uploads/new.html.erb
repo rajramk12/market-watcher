@@ -1,0 +1,7 @@
+<h2>Upload Bhavcopy CSV</h2>
+
+
+<%= form_with url: admin_uploads_path, multipart: true do |f| %>
+<%= f.file_field :file, accept: '.csv' %><br><br>
+<%= f.submit 'Upload & Process' %>
+<% end %>

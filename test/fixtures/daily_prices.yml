@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stock: MyString
+  date: 2025-12-20
+  open: 9.99
+  low: 9.99
+  high: 9.99
+  close: 9.99
+  last: 9.99
+  volume: 
+  turnover: 9.99
+  extras: 
+
+two:
+  stock: MyString
+  date: 2025-12-20
+  open: 9.99
+  low: 9.99
+  high: 9.99
+  close: 9.99
+  last: 9.99
+  volume: 
+  turnover: 9.99
+  extras: 

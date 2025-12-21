@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2025-12-20
+  pe: 9.99
+  pb: 9.99
+  mcap: 9.99
+  fundamentals: 
+  stock: one
+
+two:
+  date: 2025-12-20
+  pe: 9.99
+  pb: 9.99
+  mcap: 9.99
+  fundamentals: 
+  stock: two

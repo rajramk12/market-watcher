@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Daily prices" %>
+
+<h1>Daily prices</h1>
+
+<div id="daily_prices">
+  <% @daily_prices.each do |daily_price| %>
+    <%= render daily_price %>
+    <p>
+      <%= link_to "Show this daily price", daily_price %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New daily price", new_daily_price_path %>
