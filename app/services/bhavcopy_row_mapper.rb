@@ -1,7 +1,7 @@
 class BhavcopyRowMapper
 def self.map(row)
 {
-symbol_code: row['SYMBOL'],
+stock: row['SYMBOL'],
 series: row['SERIES'],
 trade_date: Date.parse(row['DATE1']),
 
@@ -15,13 +15,14 @@ close_price: row['CLOSE_PRICE'].to_d,
 avg_price: row['AVG_PRICE'].to_d,
 
 
-total_traded_qty: row['TTL_TRD_QNTY'].to_i,
+traded_qty: row['TTL_TRD_QNTY'].to_i,
 turnover_lacs: row['TURNOVER_LACS'].to_d,
 no_of_trades: row['NO_OF_TRADES'].to_i,
 
 
 delivered_qty: row['DELIV_QTY'].to_i,
-delivered_percent: row['DELIV_PER'].to_d
+delivery_percent: row['DELIV_PER'].to_f,
+extras: row['extras'].to_json
 }
 end
 end

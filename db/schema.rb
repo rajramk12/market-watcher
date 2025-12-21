@@ -12,27 +12,25 @@
 
 ActiveRecord::Schema[8.1].define(version: 2025_12_20_102328) do
   create_table "daily_prices", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.decimal "avg", precision: 15, scale: 4
-    t.decimal "close", precision: 15, scale: 4
+    t.decimal "avg_price", precision: 15, scale: 4
+    t.decimal "close_price", precision: 15, scale: 4
     t.datetime "created_at", null: false
-    t.date "date", null: false
-    t.decimal "deliver_percent", precision: 7, scale: 2
+    t.bigint "delivered_qty"
+    t.decimal "delivery_percent", precision: 7, scale: 4
     t.json "extras"
-    t.decimal "high", precision: 15, scale: 4
-    t.decimal "last", precision: 15, scale: 4
-    t.decimal "low", precision: 15, scale: 4
-    t.decimal "open", precision: 15, scale: 4
-    t.decimal "prev_day", precision: 10
+    t.decimal "high_price", precision: 15, scale: 4
+    t.decimal "last_price", precision: 15, scale: 4
+    t.decimal "low_price", precision: 15, scale: 4
+    t.bigint "no_of_trades"
+    t.decimal "open_price", precision: 15, scale: 4
+    t.decimal "prev_close", precision: 15, scale: 4
     t.string "series"
     t.bigint "stock_id", null: false
-    t.bigint "total_delivered"
-    t.bigint "total_traded"
-    t.decimal "turnover", precision: 20, scale: 4
+    t.date "trade_date", null: false
+    t.bigint "traded_qty"
+    t.decimal "turnover_lacs", precision: 20, scale: 4
     t.datetime "updated_at", null: false
-    t.bigint "volume"
-    t.index ["date"], name: "index_daily_prices_on_date"
-    t.index ["stock_id", "date"], name: "index_daily_prices_on_stock_id_and_date", unique: true
-    t.index ["stock_id"], name: "index_daily_prices_on_stock_id"
+    t.index ["stock_id", "trade_date"], name: "index_daily_prices_on_stock_id_and_date", unique: true
   end
 
   create_table "documents", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

@@ -8,6 +8,9 @@ class StocksController < ApplicationController
 
   # GET /stocks/1 or /stocks/1.json
   def show
+    debugger
+    @daily_prices = @stock.daily_prices.limit(10)    
+    debugger
   end
 
   # GET /stocks/new
