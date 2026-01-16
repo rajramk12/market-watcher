@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   resources :metrics, only: [:show]
   resources :daily_prices, only: [:index]
   resources :stocks, only: [:index, :show]
-
-  root :stocks, only: [:index, :show]
   resources :exchanges, only: [:index, :show]
+
+  root "stocks#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
