@@ -6,10 +6,10 @@ class Stock < ApplicationRecord
   validates :name, presence: true
   validates :isin, uniqueness: { allow_blank: true, case_sensitive: false }
 
-  scope :by_symbol, ->(symbol) { where(symbol: symbol) }
+  scope :by_symbol, ->(stock) { where(symbol: symbol) }
 
   def latest_price
-    self.daily_prices.order(date: :desc).first
+    self.daily_prices.order(trade_date: :desc).first
   end
 
 end
