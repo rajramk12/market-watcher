@@ -12,6 +12,8 @@
 
 ActiveRecord::Schema[8.1].define(version: 2025_12_20_102328) do
   create_table "daily_prices", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "stock_id", null: false
+    t.date "trade_date", null: false
     t.decimal "avg_price", precision: 15, scale: 4
     t.decimal "close_price", precision: 15, scale: 4
     t.datetime "created_at", null: false
@@ -25,12 +27,11 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_20_102328) do
     t.decimal "open_price", precision: 15, scale: 4
     t.decimal "prev_close", precision: 15, scale: 4
     t.string "series"
-    t.bigint "stock_id", null: false
-    t.date "trade_date", null: false
     t.bigint "traded_qty"
     t.decimal "turnover_lacs", precision: 20, scale: 4
     t.datetime "updated_at", null: false
     t.index ["stock_id", "trade_date"], name: "index_daily_prices_on_stock_id_and_date", unique: true
+    t.index ["trade_date"], name: "index_daily_prices_on_date", unique: false
   end
 
   create_table "documents", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

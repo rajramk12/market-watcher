@@ -1,8 +1,8 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @stock %>
-<%= @daily_prices.each do |price| %>
-  <% render price %>
+<% @daily_prices.each do |price| %>
+  <%= render price %>
 <% end %>
 <div>
   <%= link_to "Back to stocks", stocks_path %>

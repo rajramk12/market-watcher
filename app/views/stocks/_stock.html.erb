@@ -1,32 +1,89 @@
-<div id="<%= dom_id stock %>">
-  <div>
-    <strong>Stock:</strong>
-    <%= stock.stock %>
+<div id="<%= dom_id stock %>" class="card h-100 shadow-sm border-0 hover-shadow-lg transition">
+  <div class="card-header bg-gradient border-0">
+    <h5 class="card-title mb-0 text-primary">
+      <i class="fas fa-chart-line me-2"></i><%= stock.stock %>
+    </h5>
+    <p class="text-muted small mb-0"><%= stock.name %></p>
   </div>
 
-  <div>
-    <strong>Name:</strong>
-    <%= stock.name %>
+  <div class="card-body">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="info-group">
+          <label class="form-label fw-bold text-secondary">Stock Code</label>
+          <p class="text-dark mb-0"><%= stock.stock %></p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="info-group">
+          <label class="form-label fw-bold text-secondary">ISIN</label>
+          <p class="text-dark mb-0">
+            <code class="bg-light px-2 py-1 rounded"><%= stock.isin %></code>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="info-group">
+          <label class="form-label fw-bold text-secondary">Status</label>
+          <div class="mt-2">
+            <% if stock.active %>
+              <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>Active</span>
+            <% else %>
+              <span class="badge bg-danger"><i class="fas fa-times-circle me-1"></i>Inactive</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="info-group">
+          <label class="form-label fw-bold text-secondary">Exchange</label>
+          <p class="text-dark mb-0"><%= stock.exchange_id %></p>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="info-group">
+          <label class="form-label fw-bold text-secondary">Mappings</label>
+          <div class="alert alert-light border-1 mb-0">
+            <p class="text-muted mb-0"><small><%= stock.mappings.present? ? stock.mappings : "No mappings available" %></small></p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <strong>Isin:</strong>
-    <%= stock.isin %>
+  <div class="card-footer bg-light border-top">
+    <small class="text-muted">Last updated: <%= time_ago_in_words(stock.updated_at) %> ago</small>
   </div>
-
-  <div>
-    <strong>Active:</strong>
-    <%= stock.active %>
-  </div>
-
-  <div>
-    <strong>Mappings:</strong>
-    <%= stock.mappings %>
-  </div>
-
-  <div>
-    <strong>Exchange:</strong>
-    <%= stock.exchange_id %>
-  </div>
-
 </div>
+
+<style>
+  .hover-shadow-lg:hover {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.15) !important;
+  }
+
+  .transition {
+    transition: all 0.3s ease-in-out;
+  }
+
+  .bg-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+
+  .info-group {
+    padding: 0.5rem 0;
+  }
+
+  .info-group label {
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+  }
+</style>
