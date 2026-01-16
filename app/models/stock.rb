@@ -1,6 +1,6 @@
 class Stock < ApplicationRecord
   belongs_to :exchange
-  has_many :daily_prices, -> { order(date: :desc) }, dependent: :destroy
+  has_many :daily_prices, -> { order(trade_date: :desc) }, dependent: :destroy
 
   validates :symbol, presence: true, uniqueness: { case_sensitive: false }
   validates :name, presence: true
