@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :metrics, only: [:show]
   resources :daily_prices, only: [:index]
   resources :stocks, only: [:index, :show]
+
+  root :stocks, only: [:index, :show]
   resources :exchanges, only: [:index, :show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -17,7 +19,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   #
-  namespace :admin do 
+  namespace :admin do
     resources :uploads, only: [:new, :create]
   end
 end

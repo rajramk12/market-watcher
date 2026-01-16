@@ -1,4 +1,4 @@
-<div id="<%= dom_id stock %>" class="card h-100 shadow-sm border-0 hover-shadow-lg transition">
+<div id="<%= dom_id stock %>" class="stock-card card h-100 shadow-sm border-0 hover-shadow-lg transition">
   <div class="card-header bg-gradient border-0">
     <h5 class="card-title mb-0 text-primary">
       <i class="fas fa-chart-line me-2"></i><%= stock.stock %>
@@ -6,7 +6,7 @@
     <p class="text-muted small mb-0"><%= stock.name %></p>
   </div>
 
-  <div class="card-body">
+  <div class="card-body">git
     <div class="row g-3">
       <div class="col-md-6">
         <div class="info-group">
@@ -59,31 +59,3 @@
     <small class="text-muted">Last updated: <%= time_ago_in_words(stock.updated_at) %> ago</small>
   </div>
 </div>
-
-<style>
-  .hover-shadow-lg:hover {
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.15) !important;
-  }
-
-  .transition {
-    transition: all 0.3s ease-in-out;
-  }
-
-  .bg-gradient {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-  }
-
-  .info-group {
-    padding: 0.5rem 0;
-  }
-
-  .info-group label {
-    margin-bottom: 0.25rem;
-    font-size: 0.85rem;
-  }
-
-  .card-title {
-    font-size: 1.1rem;
-  }
-</style>
