@@ -1,52 +1,107 @@
-<div id="<%= dom_id daily_price %>">
-  <div>
-    <strong>Stock:</strong>
-    <%= daily_price.stock %>
+<div id="<%= dom_id daily_price %>" class="daily-price-card card h-100 shadow-sm border-0 hover-shadow-lg transition">
+  <!-- Header -->
+  <div class="card-header bg-gradient border-0">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <h5 class="card-title mb-0 text-white">
+          <i class="fas fa-calendar-alt me-2"></i><%= daily_price.trade_date.strftime('%B %d, %Y') %>
+        </h5>
+        <p class="text-white-50 small mb-0"><%= daily_price.stock.name %> (<%= daily_price.stock.stock %>)</p>
+      </div>
+      <div>
+        <span class="badge bg-white text-dark fw-bold"><%= daily_price.series %></span>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <strong>Date:</strong>
-    <%= daily_price.trade_date %>
+  <!-- Price Information -->
+  <div class="card-body">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="price-box">
+          <label class="price-label">Open</label>
+          <p class="price-value"><i class="fas fa-arrow-up text-info"></i> ₹<%= number_with_precision(daily_price.open_price, precision: 2) %></p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="price-box">
+          <label class="price-label">Close</label>
+          <p class="price-value"><i class="fas fa-arrow-down text-warning"></i> ₹<%= number_with_precision(daily_price.close_price, precision: 2) %></p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="price-box">
+          <label class="price-label">High</label>
+          <p class="price-value text-success"><i class="fas fa-arrow-up"></i> ₹<%= number_with_precision(daily_price.high_price, precision: 2) %></p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="price-box">
+          <label class="price-label">Low</label>
+          <p class="price-value text-danger"><i class="fas fa-arrow-down"></i> ₹<%= number_with_precision(daily_price.low_price, precision: 2) %></p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="price-box">
+          <label class="price-label">Last Price</label>
+          <p class="price-value"><i class="fas fa-tag"></i> ₹<%= number_with_precision(daily_price.last_price, precision: 2) %></p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="price-box">
+          <label class="price-label">Previous Close</label>
+          <p class="price-value"><i class="fas fa-history"></i> ₹<%= number_with_precision(daily_price.prev_close, precision: 2) %></p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="price-box">
+          <label class="price-label">Volume</label>
+          <p class="price-value"><i class="fas fa-cubes"></i> <%= number_with_delimiter(daily_price.traded_qty) %></p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="price-box">
+          <label class="price-label">Turnover (₹ Lacs)</label>
+          <p class="price-value"><i class="fas fa-money-bill-wave"></i> <%= number_with_precision(daily_price.turnover_lacs, precision: 2) %></p>
+        </div>
+      </div>
+
+      <% if daily_price.delivered_qty.present? %>
+        <div class="col-md-6">
+          <div class="price-box">
+            <label class="price-label">Delivered Qty</label>
+            <p class="price-value"><i class="fas fa-check-circle text-success"></i> <%= number_with_delimiter(daily_price.delivered_qty) %></p>
+          </div>
+        </div>
+      <% end %>
+
+      <% if daily_price.delivery_percent.present? %>
+        <div class="col-md-6">
+          <div class="price-box">
+            <label class="price-label">Delivery %</label>
+            <p class="price-value"><i class="fas fa-percent"></i> <%= number_with_precision(daily_price.delivery_percent, precision: 2) %>%</p>
+          </div>
+        </div>
+      <% end %>
+
+      <% if daily_price.no_of_trades.present? %>
+        <div class="col-md-6">
+          <div class="price-box">
+            <label class="price-label">Number of Trades</label>
+            <p class="price-value"><i class="fas fa-exchange-alt"></i> <%= number_with_delimiter(daily_price.no_of_trades) %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 
-  <div>
-    <strong>Open:</strong>
-    <%= daily_price.open_price %>
+  <!-- Footer -->
+  <div class="card-footer bg-light border-top">
+    <small class="text-muted"><i class="fas fa-info-circle me-1"></i>Data as of <%= daily_price.trade_date.strftime('%B %d, %Y') %></small>
   </div>
-
-  <div>
-    <strong>Low:</strong>
-    <%= daily_price.low_price %>
-  </div>
-
-  <div>
-    <strong>High:</strong>
-    <%= daily_price.high_price %>
-  </div>
-
-  <div>
-    <strong>Close:</strong>
-    <%= daily_price.close_price %>
-  </div>
-
-  <div>
-    <strong>Last:</strong>
-    <%= daily_price.last_price %>
-  </div>
-
-  <div>
-    <strong>Volume:</strong>
-    <%= daily_price.traded_qty %>
-  </div>
-
-  <div>
-    <strong>Turnover:</strong>
-    <%= daily_price.turnover_lacs %>
-  </div>
-
-  <div>
-    <strong>Extras:</strong>
-    <%= daily_price.extras %>
-  </div>
-
 </div>

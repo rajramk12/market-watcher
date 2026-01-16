@@ -1,0 +1,220 @@
+/* ============================================
+   DAILY PRICES PAGE STYLES
+   ============================================ */
+
+/* Page Container */
+.daily-prices-page {
+  padding: 2rem 1rem;
+  min-height: 100vh;
+}
+
+/* Daily Prices Grid Layout */
+.daily-prices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Daily Price Card */
+.daily-price-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+}
+
+.daily-price-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+}
+
+.daily-price-card .card-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1.5rem;
+  color: white;
+  border: none;
+}
+
+.daily-price-card .card-header .card-title {
+  color: white;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.daily-price-card .card-header p {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.daily-price-card .card-header .badge {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.daily-price-card .card-body {
+  flex-grow: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.daily-price-card .card-footer {
+  margin-top: auto;
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  padding: 1rem 1.5rem;
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+/* Price Box */
+.price-box {
+  padding: 0.75rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 3px solid #667eea;
+  transition: all 0.3s ease;
+}
+
+.price-box:hover {
+  background-color: #f0f1ff;
+  border-left-color: #764ba2;
+}
+
+.price-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6c757d;
+  margin-bottom: 0.4rem;
+}
+
+.price-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #212529;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.price-value i {
+  font-size: 0.9rem;
+}
+
+.price-value.text-success {
+  color: #28a745;
+}
+
+.price-value.text-danger {
+  color: #dc3545;
+}
+
+.price-value.text-info {
+  color: #17a2b8;
+}
+
+.price-value.text-warning {
+  color: #ffc107;
+  color: #ffc107;
+}
+
+/* Daily Prices Footer */
+.daily-prices-footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid #f0f0f0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .daily-prices-grid {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .daily-prices-page {
+    padding: 1.5rem 1rem;
+  }
+
+  .daily-prices-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .daily-price-card .card-header {
+    padding: 1.25rem;
+  }
+
+  .daily-price-card .card-body {
+    padding: 1.25rem;
+  }
+
+  .price-label {
+    font-size: 0.7rem;
+  }
+
+  .price-value {
+    font-size: 1rem;
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .daily-prices-page {
+    padding: 1rem;
+  }
+
+  .daily-prices-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .daily-price-card .card-header {
+    padding: 1rem;
+  }
+
+  .daily-price-card .card-body {
+    padding: 1rem;
+  }
+
+  .daily-price-card .card-footer {
+    padding: 0.75rem 1rem;
+  }
+
+  .price-box {
+    padding: 0.6rem;
+  }
+
+  .price-label {
+    font-size: 0.65rem;
+  }
+
+  .price-value {
+    font-size: 0.95rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .daily-prices-footer {
+    padding-top: 1rem;
+    margin-top: 2rem;
+  }
+}
