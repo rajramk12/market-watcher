@@ -1,0 +1,279 @@
+/* ============================================
+   STOCK CARD & PAGE STYLES
+   ============================================ */
+
+/* Stock Page Container */
+.stocks-page {
+  padding: 2rem 1rem;
+  min-height: 100vh;
+}
+
+/* Page Header */
+.page-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.page-title i {
+  color: #667eea;
+  font-size: 2.8rem;
+}
+
+/* Stock Grid Layout */
+.stocks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.stock-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.stock-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+}
+
+.stock-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+}
+
+.stock-card .card-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1.5rem;
+  color: white;
+  border: none;
+}
+
+.stock-card .card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.stock-card .card-footer {
+  margin-top: auto;
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  padding: 1rem 1.5rem;
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+/* Info Group Styling */
+.info-group {
+  padding: 0.5rem 0;
+}
+
+.info-group label {
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6c757d;
+}
+
+.info-group p {
+  color: #212529;
+  margin-bottom: 0;
+  font-size: 0.95rem;
+}
+
+.info-group code {
+  background-color: #f8f9fa;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  font-size: 0.875rem;
+  color: #d63384;
+}
+
+/* Stock Actions */
+.stock-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.stock-actions .btn {
+  flex: 1;
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+}
+
+.stock-actions .btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+}
+
+.stock-actions .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+}
+
+.stock-actions .btn-outline-secondary {
+  border: 2px solid #dee2e6;
+  color: #6c757d;
+}
+
+.stock-actions .btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: white;
+  border-color: #6c757d;
+}
+
+/* Badges in Cards */
+.stock-card .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.stock-card .badge.bg-success {
+  background-color: #28a745 !important;
+  color: white;
+}
+
+.stock-card .badge.bg-danger {
+  background-color: #dc3545 !important;
+  color: white;
+}
+
+/* Alert in Cards */
+.stock-card .alert-light {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-left: 3px solid #667eea;
+  padding: 0.75rem;
+  margin-bottom: 0;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.empty-state i {
+  color: #667eea;
+  margin-bottom: 1rem;
+}
+
+.empty-state p {
+  color: #6c757d;
+  font-size: 1.1rem;
+}
+
+/* Footer */
+.stocks-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid #f0f0f0;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .stocks-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .stocks-page {
+    padding: 1.5rem 1rem;
+  }
+
+  .stocks-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .page-title {
+    font-size: 1.75rem;
+  }
+
+  .page-title i {
+    font-size: 2rem;
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+  }
+
+  .stock-actions {
+    flex-direction: column;
+  }
+
+  .stock-actions .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .stocks-page {
+    padding: 1rem;
+  }
+
+  .stocks-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .page-title i {
+    font-size: 1.5rem;
+  }
+
+  .stock-card .card-header {
+    padding: 1rem;
+  }
+
+  .stock-card .card-body {
+    padding: 1rem;
+  }
+
+  .stock-card .card-footer {
+    padding: 0.75rem 1rem;
+  }
+
+  .page-header {
+    margin-bottom: 1.5rem;
+  }
+}
