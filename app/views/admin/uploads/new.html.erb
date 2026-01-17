@@ -1,7 +1,26 @@
-<h2>Upload Bhavcopy CSV</h2>
+<h2>Upload Bhavcopy CSV - Daily Market Data</h2>
 
+<p>Upload NSE Bhavcopy daily pricing data. The system will process the CSV asynchronously using Sidekiq and calculate:</p>
+<ul>
+  <li>Change Percentage: (close_price - prev_close) / prev_close * 100</li>
+  <li>Change Absolute Amount: close_price - prev_close</li>
+  <li>Total Combined Qty * Amount: traded_qty * avg_price</li>
+</ul>
 
 <%= form_with url: admin_uploads_path, multipart: true do |f| %>
-<%= f.file_field :file, accept: '.csv' %><br><br>
-<%= f.submit 'Upload & Process' %>
+  <div class="form-group">
+    <%= f.label :file, "Select Bhavcopy CSV File" %>
+    <%= f.file_field :file, accept: '.csv', required: true %>
+    <small class="form-text text-muted">Format: NSE Bhavcopy daily data (SYMBOL, SERIES, DATE1, PREV_CLOSE, OPEN_PRICE, HIGH_PRICE, LOW_PRICE, LAST_PRICE, CLOSE_PRICE, AVG_PRICE, TTL_TRD_QNTY, TURNOVER_LACS, NO_OF_TRADES, DELIV_QTY, DELIV_PER)</small>
+  </div>
+  <br>
+  <%= f.submit 'Upload & Process', class: 'btn btn-primary' %>
+<% end %>
+
+<% if notice %>
+  <div class="alert alert-success mt-3"><%= notice %></div>
+<% end %>
+
+<% if alert %>
+  <div class="alert alert-danger mt-3"><%= alert %></div>
 <% end %>

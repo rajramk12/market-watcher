@@ -12,4 +12,7 @@ class Stock < ApplicationRecord
     self.daily_prices.order(trade_date: :desc).first
   end
 
+
+  
+
 end

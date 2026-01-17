@@ -10,6 +10,7 @@ class StocksController < ApplicationController
   def show
     debugger
     @daily_prices = @stock.daily_prices.limit(10)
+    
   end
 
   # GET /stocks/new
