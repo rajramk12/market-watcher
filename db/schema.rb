@@ -73,7 +73,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_20_102328) do
     t.string "isin"
     t.json "mappings"
     t.string "name"
-    t.string "stock"
+    t.string "stock_id"
     t.datetime "updated_at", null: false
     t.index ["exchange_id", "stock"], name: "index_stocks_on_exchange_id_and_stock", unique: true
     t.index ["exchange_id"], name: "index_stocks_on_exchange_id"
