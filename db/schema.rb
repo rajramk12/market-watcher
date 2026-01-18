@@ -42,7 +42,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_20_102328) do
     t.bigint "stock_id", null: false
     t.string "title"
     t.datetime "updated_at", null: false
-    t.index ["stock"], name: "index_documents_on_stock_id"
+    t.index ["stock_id"], name: "index_documents_on_stock_id"
   end
 
   create_table "exchanges", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
