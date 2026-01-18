@@ -1,4 +1,5 @@
 class DailyPrice < ApplicationRecord
   belongs_to :stock
-  validates :date, presence: true
+
+  validates :trade_date, presence: true
 end

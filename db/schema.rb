@@ -30,7 +30,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_20_102328) do
     t.bigint "traded_qty"
     t.decimal "turnover_lacs", precision: 20, scale: 4
     t.datetime "updated_at", null: false
-    t.index ["stock_id", "trade_date"], name: "index_daily_prices_on_stock_id_and_date", unique: true
+    t.index ["stock", "trade_date"], name: "index_daily_prices_on_stock_id_and_date", unique: true
     t.index ["trade_date"], name: "index_daily_prices_on_date", unique: false
   end
 
@@ -39,7 +39,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_20_102328) do
     t.string "doc_type"
     t.json "metadata"
     t.string "s3_key"
-    t.bigint "stock_id", null: false
+    t.bigint "stock", null: false
     t.string "title"
     t.datetime "updated_at", null: false
     t.index ["stock"], name: "index_documents_on_stock_id"
