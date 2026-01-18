@@ -36,8 +36,8 @@ class BhavcopyRowMapper
       delivery_percent: row['DELIV_PER'].to_f,
       change_percentage: change_percentage,
       change_absolute: change_absolute,
-      total_combined_qty_amount: total_combined_qty_amount,
-      extras: row['extras'].to_json
+      total_combined_qty_amount: total_combined_qty_amount
     }
   end
 end
+

@@ -51,6 +51,7 @@ bundle exec sidekiq -c 5 -v
 ### If you see connection errors:
 ```ruby
 # In Rails console
+require 'sidekiq'
 Sidekiq.redis { |conn| conn.ping }
 # Should return: "PONG"
 ```
@@ -58,6 +59,7 @@ Sidekiq.redis { |conn| conn.ping }
 ### Check if Redis URL is correct:
 ```ruby
 # In Rails console
+require 'sidekiq'
 puts ENV['REDIS_URL']
 # Should show: redis://localhost:6379/1 (or your custom URL)
 ```
@@ -68,10 +70,13 @@ puts ENV['REDIS_URL']
 
 ### Option A: Check in Rails Console
 ```ruby
-# Start Rails console in current terminal
+# Start Rails console with proper environment
 rails c
 
-# Check queue status
+# IMPORTANT: Load Sidekiq first
+require 'sidekiq'
+
+# Now check queue status
 Sidekiq::Queue.new('ingest').size  # Should decrease as jobs process
 
 # Check stats
@@ -82,6 +87,7 @@ puts "Failed: #{stats.failed}"
 
 # Check if workers are active
 Sidekiq::Workers.new.each { |id, data| puts "Worker: #{id}, Queue: #{data['queue']}" }
+```
 ```
 
 ### Option B: Use Web Dashboard
@@ -109,6 +115,7 @@ redis-cli ping
 Check if workers are actually running:
 ```ruby
 # In Rails console
+require 'sidekiq'
 workers = Sidekiq::Workers.new
 puts workers.size  # Should be > 0
 
@@ -156,6 +163,7 @@ Dir.glob('**/*.csv')
 ### Trigger a test job:
 ```ruby
 # In Rails console
+require 'sidekiq'
 CsvUploadWorker.perform_async('/path/to/test.csv')
 
 # Immediately check queue
@@ -168,6 +176,7 @@ Sidekiq::Queue.new('ingest').size  # Should be 0 if processing worked
 
 ### Check if job was processed:
 ```ruby
+require 'sidekiq'
 stats = Sidekiq::Stats.new
 puts "Processed: #{stats.processed}"  # Should increase
 ```
@@ -215,6 +224,9 @@ bundle exec sidekiq -c 5 -v
 ### Terminal 4 - Monitor (Optional):
 ```bash
 rails c
+
+# Once in console, require Sidekiq
+require 'sidekiq'
 
 # Watch processing
 loop do
@@ -265,6 +277,7 @@ tail -f log/development.log
 
 # Rails console checks
 rails c
+require 'sidekiq'
 Sidekiq::Queue.new('ingest').size
 Sidekiq::Stats.new
 Sidekiq::Workers.new
@@ -281,6 +294,7 @@ After jobs complete, verify data was inserted:
 
 ```ruby
 # In Rails console
+require 'sidekiq'
 DailyPrice.count          # Check row count increased
 DailyPrice.last 5         # View recent entries
 Stock.count               # Check stocks were created
