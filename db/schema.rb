@@ -13,6 +13,7 @@
 ActiveRecord::Schema[8.1].define(version: 2025_12_20_102328) do
   create_table "daily_prices", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.date "trade_date", null: false
+    t.bigint "stock_id", null: false
     t.decimal "avg_price", precision: 15, scale: 4
     t.decimal "close_price", precision: 15, scale: 4
     t.datetime "created_at", null: false
