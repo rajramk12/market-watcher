@@ -8,6 +8,29 @@ module Admin
       @failed_jobs = fetch_failed_jobs
     end
 
+    def clear_queue
+      queue_name = params[:queue]
+      queue = Sidekiq::Queue.new(queue_name)
+      queue.clear
+
+      redirect_to admin_sidekiq_path, notice: "Queue '#{queue_name}' cleared. #{queue.size} jobs removed."
+    end
+
+    def retry_failed
+      failed_set = Sidekiq::SortedSet.new('failed')
+      failed_set.each { |job| job.retry }
+
+      count = failed_set.size
+      redirect_to admin_sidekiq_path, notice: "#{count} failed jobs have been retried."
+    end
+
+    def clear_failed
+      failed_set = Sidekiq::SortedSet.new('failed')
+      failed_set.clear
+
+      redirect_to admin_sidekiq_path, notice: "All failed jobs have been cleared."
+    end
+
     private
 
     def fetch_queues
