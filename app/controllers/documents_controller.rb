@@ -65,6 +65,6 @@ class DocumentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def document_params
-      params.expect(document: [ :doc_type, :title, :s3_key, :metadata, :Stock_id ])
+      params.expect(document: [ :doc_type, :title, :s3_key, :metadata, :stock_id ])
     end
 end

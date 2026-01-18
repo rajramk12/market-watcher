@@ -4,7 +4,6 @@ class CreateExchanges < ActiveRecord::Migration[8.1]
       t.string :code
       t.string :name
       t.json :metadata
-
       t.timestamps
     end
 
