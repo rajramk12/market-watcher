@@ -1,3 +1,3 @@
 class Document < ApplicationRecord
-  belongs_to :Stock
+  belongs_to :stock
 end

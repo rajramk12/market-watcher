@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema[8.1].define(version: 2025_12_20_102328) do
   create_table "daily_prices", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "stock", null: false
+    t.string "stock", null: false
     t.date "trade_date", null: false
     t.decimal "avg_price", precision: 15, scale: 4
     t.decimal "close_price", precision: 15, scale: 4
@@ -73,7 +73,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_20_102328) do
     t.string "isin"
     t.json "mappings"
     t.string "name"
-    t.string "stock"
+    t.string "stock", null: false
     t.datetime "updated_at", null: false
     t.index ["exchange_id", "stock"], name: "index_stocks_on_exchange_id_and_stock", unique: true
     t.index ["exchange_id"], name: "index_stocks_on_exchange_id"

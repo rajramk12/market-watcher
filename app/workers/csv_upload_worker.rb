@@ -9,7 +9,7 @@ class CsvUploadWorker
       stock = Stock.find_or_create_by!(stock: mapped[:stock], exchange_id: exchange.id)
 
       DailyPrice.upsert({
-        stock: stock.id,
+        stock_id: stock.id,
         trade_date: mapped[:trade_date],
         series: mapped[:series],
         prev_close: mapped[:prev_close],

@@ -65,6 +65,6 @@ class DailyPricesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def daily_price_params
-      params.expect(daily_price: [ :stock, :date, :open, :low, :high, :close, :last, :volume, :turnover, :extras ])
+      params.expect(daily_price: [ :stock_id, :trade_date, :series, :prev_close, :open_price, :high_price, :low_price, :last_price, :close_price, :avg_price, :traded_qty, :turnover_lacs, :no_of_trades, :delivered_qty, :delivery_percent, :change_percentage, :change_absolute, :total_combined_qty_amount, :extras ])
     end
 end

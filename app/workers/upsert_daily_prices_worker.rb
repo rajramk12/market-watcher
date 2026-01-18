@@ -7,7 +7,7 @@ class UpsertDailyPricesWorker
       stock = Stock.find_or_create_by!(exchange_id: r['exchange_id'], stock: r['stock'])
 
       DailyPrice.upsert({
-        stock: stock.id,
+        stock_id: stock.id,
         trade_date: r['trade_date'],
         series: r['series'],
         prev_close: r['prev_close'],
