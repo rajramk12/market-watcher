@@ -67,6 +67,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_20_102328) do
   end
 
   create_table "stocks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "stock_id", null: false
     t.boolean "active"
     t.datetime "created_at", null: false
     t.bigint "exchange_id", null: false
