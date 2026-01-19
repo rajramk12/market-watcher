@@ -39,8 +39,8 @@ module Admin
 
     def fetch_queues
       queues = {}
-      Sidekiq::Queue.new.each_key do |queue_name|
-        queue = Sidekiq::Queue.new(queue_name)
+      Sidekiq::Queue.all.each do |queue|
+        queue_name = queue.name
         queues[queue_name] = {
           size: queue.size,
           latency: queue.latency,
