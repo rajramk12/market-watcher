@@ -22,7 +22,7 @@ module Admin
     def retry_failed
       failed_set = Sidekiq::SortedSet.new('failed')
       count = failed_set.size
-      failed_set.each { |job| job.retry }
+      failed_set.to_a.each { |job| job.retry }
 
       redirect_to admin_sidekiq_path, notice: "#{count} failed jobs have been retried."
     end
@@ -39,59 +39,91 @@ module Admin
 
     def fetch_queues
       queues = {}
-      Sidekiq::Queue.all.each do |queue|
-        queue_name = queue.name
-        queues[queue_name] = {
-          size: queue.size,
-          latency: queue.latency,
-          jobs: queue.to_a[0...10]
-        }
+      begin
+        Sidekiq::Queue.all.each do |queue|
+          queue_name = queue.name
+          queues[queue_name] = {
+            size: queue.size,
+            latency: queue.latency,
+            jobs: queue.to_a[0...10]
+          }
+        end
+      rescue StandardError => e
+        Rails.logger.error "Error fetching queues: #{e.message}"
+        queues['error'] = { size: 0, latency: 0, jobs: ["Error: #{e.message}"] }
       end
       queues
     end
 
     def fetch_workers
       workers = []
-      Sidekiq::Workers.new.each do |worker_id, worker_data|
-        begin
-          workers << {
-            id: worker_id,
-            queue: worker_data['queue'],
-            worker: worker_data['payload']['class'],
-            started_at: Time.at(worker_data['run_at']),
-            elapsed: (Time.now - Time.at(worker_data['run_at'])).round(2),
-            args: worker_data['payload']['args'].inspect
-          }
-        rescue StandardError => e
-          Rails.logger.error "Error fetching worker data: #{e.message}"
+      begin
+        # Get all processes first
+        process_set = Sidekiq::ProcessSet.new
+        process_set.each do |process_id, process_data|
+          process_data['busy'].to_i.times do |i|
+            workers << {
+              id: "#{process_id}-#{i}",
+              queue: process_data['queues']&.first || 'unknown',
+              worker: 'Processing...',
+              started_at: Time.now,
+              elapsed: 0,
+              args: 'N/A'
+            }
+          end
         end
+      rescue StandardError => e
+        Rails.logger.error "Error fetching workers: #{e.message}"
+        workers = [{
+          id: 'error',
+          queue: 'N/A',
+          worker: "Error: #{e.message}",
+          started_at: Time.now,
+          elapsed: 0,
+          args: 'N/A'
+        }]
       end
       workers
     end
 
     def fetch_processed_jobs
-      Sidekiq.redis do |conn|
-        {
-          processed: conn.get('stat:processed').to_i,
-          failed: conn.get('stat:failed').to_i
-        }
+      begin
+        Sidekiq.redis do |conn|
+          {
+            processed: conn.get('stat:processed').to_i,
+            failed: conn.get('stat:failed').to_i
+          }
+        end
+      rescue StandardError => e
+        Rails.logger.error "Error fetching processed jobs: #{e.message}"
+        { processed: 0, failed: 0, error: e.message }
       end
     end
 
     def fetch_failed_jobs
-      failed_set = Sidekiq::SortedSet.new('failed')
-      {
-        total: failed_set.size,
-        sample: failed_set.to_a[0...5]
-      }
+      begin
+        failed_set = Sidekiq::SortedSet.new('failed')
+        {
+          total: failed_set.size,
+          sample: failed_set.to_a[0...5]
+        }
+      rescue StandardError => e
+        Rails.logger.error "Error fetching failed jobs: #{e.message}"
+        { total: 0, sample: [], error: e.message }
+      end
     end
 
     def fetch_dead_letter_jobs
-      dead_set = Sidekiq::SortedSet.new('dead')
-      {
-        total: dead_set.size,
-        sample: dead_set.to_a[0...3]
-      }
+      begin
+        dead_set = Sidekiq::SortedSet.new('dead')
+        {
+          total: dead_set.size,
+          sample: dead_set.to_a[0...3]
+        }
+      rescue StandardError => e
+        Rails.logger.error "Error fetching dead letter jobs: #{e.message}"
+        { total: 0, sample: [], error: e.message }
+      end
     end
 
     def fetch_redis_info
