@@ -20,7 +20,7 @@ class CsvUploadWorker
         row_count += 1
         begin
           mapped = BhavcopyRowMapper.map(row.to_h)
-          stock = Stock.find_or_create_by!(stock: mapped[:stock], exchange_id: exchange.id)
+          stock = Stock.find_or_create_by!(stock_id: mapped[:stock], exchange_id: exchange.id)
 
           DailyPrice.upsert({
             stock_id: stock.id,
