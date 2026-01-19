@@ -7,3 +7,17 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+# Seed Exchanges
+exchanges = [
+  { code: 'NSE', name: 'National Stock Exchange of India' },
+  { code: 'BSE', name: 'Bombay Stock Exchange' }
+]
+
+exchanges.each do |exchange_attrs|
+  Exchange.find_or_create_by!(code: exchange_attrs[:code]) do |exchange|
+    exchange.name = exchange_attrs[:name]
+  end
+end
+
+puts "✓ Seeded #{exchanges.size} exchanges"
