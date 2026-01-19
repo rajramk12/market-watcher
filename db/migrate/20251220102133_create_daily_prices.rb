@@ -11,7 +11,7 @@ class CreateDailyPrices < ActiveRecord::Migration[8.1]
       t.decimal :close, precision: 15, scale: 4
       t.decimal :last, precision: 15, scale: 4
       t.decimal :avg, precision: 15, scale: 4
-      t.bigint  :total_traded 
+      t.bigint  :total_traded
       t.bigint :volume
       t.decimal :turnover, precision: 20, scale: 4
       t.bigint :total_delivered
@@ -20,7 +20,7 @@ class CreateDailyPrices < ActiveRecord::Migration[8.1]
 
       t.timestamps
     end
-    add_index :daily_prices, [:stock_id, :date], unique: true
+    add_index :daily_prices, [:stock, :date], unique: true
     add_index :daily_prices, :date
   end
 end
