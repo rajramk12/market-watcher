@@ -43,7 +43,7 @@ class CsvUploadWorker
             total_combined_qty_amount: mapped[:total_combined_qty_amount],
             created_at: Time.current,
             updated_at: Time.current
-          })
+          }, unique_by: [:stock_id, :trade_date])
         rescue StandardError => e
           error_count += 1
           logger.error "Error processing row #{row_count}: #{e.message}"
@@ -59,9 +59,16 @@ class CsvUploadWorker
       logger.error "CSV Upload Failed: #{e.message}"
       logger.error e.backtrace.join("\n")
       raise
+    ensure
+      # Clean up file after processing (success or failure)
+      if File.exist?(file_path)
+        File.delete(file_path)
+        logger.info "Cleaned up file: #{file_path}"
+      end
     end
   end
 end
+
 
 
 
