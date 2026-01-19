@@ -20,10 +20,10 @@ class CsvUploadWorker
         row_count += 1
         begin
           mapped = BhavcopyRowMapper.map(row.to_h)
-          stock = Stock.find_or_create_by!(stock: mapped[:stock], exchange_id: exchange.id)
+          stock = Stock.upsert(stock: mapped[:stock], exchange_id: exchange.id ,name: mapped[:name], price: mapped[:last_price], isin: mapped[:isin], active: true,d1_change: mapped[:change_absolute], d1_change_percent: mapped[:change_percentage])
 
           DailyPrice.upsert({
-            stock_id: stock.id,
+            stock: stock.stock,
             date: mapped[:trade_date],
             series: mapped[:series],
             prev_day: mapped[:prev_close],
@@ -38,9 +38,11 @@ class CsvUploadWorker
             volume: mapped[:no_of_trades],
             total_delivered: mapped[:delivered_qty],
             deliver_percent: mapped[:delivery_percent],
+            change_percent: mapped[:change_percentage],
+            change_absolute: mapped[:change_absolute],
             created_at: Time.current,
             updated_at: Time.current
-          }, unique_by: [:stock_id, :date])
+          }, unique_by: [:stock, :date])
         rescue StandardError => e
           error_count += 1
           logger.error "Error processing row #{row_count}: #{e.message}"

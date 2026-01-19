@@ -16,8 +16,9 @@ class CreateDailyPrices < ActiveRecord::Migration[8.1]
       t.decimal :turnover, precision: 20, scale: 4
       t.bigint :total_delivered
       t.decimal :deliver_percent, precision: 7, scale: 2
+      t.decimal :change_percent, precision: 7, scale: 2
+      t.decimal :change_absolute, precision: 15, scale: 4
       t.json :extras
-
       t.timestamps
     end
     add_index :daily_prices, [:stock, :date], unique: true
