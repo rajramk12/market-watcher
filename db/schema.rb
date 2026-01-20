@@ -30,7 +30,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_20_102328) do
     t.bigint "traded_qty"
     t.decimal "turnover_lacs", precision: 20, scale: 4
     t.datetime "updated_at", null: false
-    t.index ["symbol", "trade_date"], name: "index_daily_prices_on_stock_id_and_date", unique: true
+    t.index ["stock_id", "trade_date"], name: "index_daily_prices_on_stock_id_and_date", unique: true
     t.index ["trade_date"], name: "index_daily_prices_on_date", unique: false
   end
 
@@ -42,7 +42,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_20_102328) do
     t.string "symbol", null: false
     t.string "title"
     t.datetime "updated_at", null: false
-    t.index ["symbol"], name: "index_documents_on_stock_id"
+    t.index ["stock_id"], name: "index_documents_on_stock_id"
   end
 
   create_table "exchanges", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -63,7 +63,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_20_102328) do
     t.decimal "pe", precision: 15, scale: 4
     t.string "symbol", null: false
     t.datetime "updated_at", null: false
-    t.index ["symbol"], name: "index_metrics_on_stock_id"
+    t.index ["stock_id"], name: "index_metrics_on_stock_id"
   end
 
   create_table "stocks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -75,12 +75,12 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_20_102328) do
     t.json "mappings"
     t.string "name"
     t.datetime "updated_at", null: false
-    t.index ["exchange_id", "symbol"], name: "index_stocks_on_exchange_id_and_stock", unique: true
+    t.index ["exchange_id", "stock_id"], name: "index_stocks_on_exchange_id_and_stock", unique: true
     t.index ["exchange_id"], name: "index_stocks_on_exchange_id"
   end
 
-  add_foreign_key "daily_prices", "stocks", column: "symbol"
-  add_foreign_key "documents", "stocks", column: "symbol"
-  add_foreign_key "metrics", "stocks", column: "symbol"
-  add_foreign_key "stocks", "exchanges", column: "symbol"
+  add_foreign_key "daily_prices", "stocks"
+  add_foreign_key "documents", "stocks"
+  add_foreign_key "metrics", "stocks"
+  add_foreign_key "stocks", "exchanges"
 end

@@ -9,6 +9,7 @@ class CreateDocuments < ActiveRecord::Migration[8.1]
 
       t.timestamps
     end
-    add_index :documents, [:stock_symbol, :title], unique: true
+    add_index :documents, :title, unique: true
+    add_index :documents, [:stock_id, :title], unique: true
   end
 end
