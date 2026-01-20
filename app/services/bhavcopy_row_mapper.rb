@@ -19,7 +19,7 @@ class BhavcopyRowMapper
     total_combined_qty_amount = (traded_qty * avg_price).round(4)
 
     {
-      stock: row['SYMBOL'],
+      symbol: row['SYMBOL'],
       series: row['SERIES'],
       trade_date: Date.parse(row['DATE1']),
       prev_close: prev_close,

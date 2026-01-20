@@ -20,10 +20,10 @@ class CsvUploadWorker
         row_count += 1
         begin
           mapped = BhavcopyRowMapper.map(row.to_h)
-          stock = Stock.upsert(stock: mapped[:stock], exchange_id: exchange.id ,name: mapped[:name], price: mapped[:last_price], isin: mapped[:isin], active: true,d1_change: mapped[:change_absolute], d1_change_percent: mapped[:change_percentage])
+          stock = Stock.upsert(symbol: mapped[:symbol], exchange_id: exchange.id ,name: mapped[:name], price: mapped[:last_price], isin: mapped[:isin], active: true,d1_change: mapped[:change_absolute], d1_change_percent: mapped[:change_percentage])
 
           DailyPrice.upsert({
-            stock: stock.stock,
+            symbol: stock.symbol,
             date: mapped[:trade_date],
             series: mapped[:series],
             prev_day: mapped[:prev_close],

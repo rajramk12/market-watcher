@@ -10,6 +10,6 @@ class CreateMetrics < ActiveRecord::Migration[8.1]
 
       t.timestamps
     end
-    add_index :metrics, [:stock_id, :date ]
+    add_index :metrics, [:symbol, :date ]
   end
 end
