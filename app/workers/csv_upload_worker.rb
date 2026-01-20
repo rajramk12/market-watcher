@@ -42,7 +42,7 @@ class CsvUploadWorker
             change_absolute: mapped[:change_absolute],
             created_at: Time.current,
             updated_at: Time.current
-          }, unique_by: [:stock, :date])
+          }, unique_by: [:symbol, :date])
         rescue StandardError => e
           error_count += 1
           logger.error "Error processing row #{row_count}: #{e.message}"

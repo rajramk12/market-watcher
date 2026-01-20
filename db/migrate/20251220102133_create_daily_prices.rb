@@ -21,7 +21,7 @@ class CreateDailyPrices < ActiveRecord::Migration[8.1]
       t.json :extras
       t.timestamps
     end
-    add_index :daily_prices, [:symbol, :date], unique: true
+    add_index :daily_prices, [:stock_symbol, :date], unique: true
     add_index :daily_prices, :date
   end
 end
