@@ -82,5 +82,5 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_20_102328) do
   add_foreign_key "daily_prices", "stocks", column: "symbol"
   add_foreign_key "documents", "stocks", column: "symbol"
   add_foreign_key "metrics", "stocks", column: "symbol"
-  add_foreign_key "stocks", "exchanges", column: "symbol"īī
+  add_foreign_key "stocks", "exchanges", column: "symbol"
 end
