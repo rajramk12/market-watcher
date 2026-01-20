@@ -79,8 +79,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_20_102328) do
     t.index ["exchange_id"], name: "index_stocks_on_exchange_id"
   end
 
-  add_foreign_key "daily_prices", "stocks"
-  add_foreign_key "documents", "stocks"
-  add_foreign_key "metrics", "stocks"
-  add_foreign_key "stocks", "exchanges"
+  add_foreign_key "daily_prices", "stocks", column: "symbol"
+  add_foreign_key "documents", "stocks", column: "symbol"
+  add_foreign_key "metrics", "stocks", column: "symbol"
+  add_foreign_key "stocks", "exchanges", column: "symbol"
 end
